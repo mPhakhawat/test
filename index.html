@@ -1,0 +1,952 @@
+
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบขอใช้ห้องคอมพิวเตอร์ - โรงเรียนสามร้อยยอดวิทยาคม</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="str.css">
+
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://i.postimg.cc/KcstbwHt/android-chrome-192x192.png" alt="โลโก้โรงเรียน">
+            <h1>ระบบขอใช้ห้องคอมพิวเตอร์</h1>
+            <h2>โรงเรียนสามร้อยยอดวิทยาคม</h2>
+        </div>
+        <button class="menu-toggle" id="menuToggle" style="display: none;">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="sidebar-menu" id="sidebarMenu">
+            <li><a href="#" class="active" data-page="home"><i class="fas fa-home"></i> หน้าหลัก</a></li>
+            <li><a href="#" data-page="booking"><i class="fas fa-calendar-plus"></i> จองห้องใหม่</a></li>
+            <li><a href="#" data-page="bookings"><i class="fas fa-list"></i> รายการจอง</a></li>
+            <li><a href="#" data-page="dashboard"><i class="fas fa-chart-bar"></i> แดชบอร์ดการจอง</a></li>
+            <li><a href="#" data-page="admin"><i class="fas fa-user-shield"></i> แอดมิน</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Page -->
+        <div class="page fade-in" id="homePage">
+            <h2 class="page-title">ห้องคอมพิวเตอร์ทั้งหมด</h2>
+            <div class="room-grid" data-aos="fade-up">
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="ห้องคอม 531">
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-name">ห้องคอม 531</h3>
+                        <p class="room-description">ห้องคอมพิวเตอร์สำหรับการเรียนการสอนทั่วไป มีคอมพิวเตอร์ 30 เครื่อง</p>
+                        <button class="book-btn" onclick="showBookingForm('ห้องคอม 531')">จองห้อง</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="ห้องคอม 532">
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-name">ห้องคอม 532</h3>
+                        <p class="room-description">ห้องคอมพิวเตอร์สำหรับการเรียนการสอนโปรแกรมมิ่ง มีคอมพิวเตอร์ 25 เครื่อง</p>
+                        <button class="book-btn" onclick="showBookingForm('ห้องคอม 532')">จองห้อง</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="ห้องคอม 533">
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-name">ห้องคอม 533</h3>
+                        <p class="room-description">ห้องคอมพิวเตอร์สำหรับการเรียนการสอนกราฟิก มีคอมพิวเตอร์ 20 เครื่อง</p>
+                        <button class="book-btn" onclick="showBookingForm('ห้องคอม 533')">จองห้อง</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="ห้องคอม 534">
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-name">ห้องคอม 534</h3>
+                        <p class="room-description">ห้องคอมพิวเตอร์สำหรับการเรียนการสอนมัลติมีเดีย มีคอมพิวเตอร์ 25 เครื่อง</p>
+                        <button class="book-btn" onclick="showBookingForm('ห้องคอม 534')">จองห้อง</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="ห้องคอม 535">
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-name">ห้องคอม 535</h3>
+                        <p class="room-description">ห้องคอมพิวเตอร์สำหรับการเรียนการสอนเน็ตเวิร์ค มีคอมพิวเตอร์ 20 เครื่อง</p>
+                        <button class="book-btn" onclick="showBookingForm('ห้องคอม 535')">จองห้อง</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="ห้องคอม 536">
+                    </div>
+                    <div class="room-info">
+                        <h3 class="room-name">ห้องคอม 536</h3>
+                        <p class="room-description">ห้องคอมพิวเตอร์สำหรับการประชุมและสัมมนา มีคอมพิวเตอร์ 15 เครื่อง</p>
+                        <button class="book-btn" onclick="showBookingForm('ห้องคอม 536')">จองห้อง</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form Page -->
+        <div class="page fade-in" id="bookingPage" style="display: none;">
+            <h2 class="page-title">จองห้องใหม่</h2>
+            <div class="form-container" data-aos="fade-up">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label class="form-label" for="roomSelect">เลือกห้อง</label>
+                        <select class="form-control" id="roomSelect" required>
+                            <option value="">-- เลือกห้อง --</option>
+                            <option value="ห้องคอม 531">ห้องคอม 531</option>
+                            <option value="ห้องคอม 532">ห้องคอม 532</option>
+                            <option value="ห้องคอม 533">ห้องคอม 533</option>
+                            <option value="ห้องคอม 534">ห้องคอม 534</option>
+                            <option value="ห้องคอม 535">ห้องคอม 535</option>
+                            <option value="ห้องคอม 536">ห้องคอม 536</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookerName">ชื่อผู้จอง</label>
+                        <input type="text" class="form-control" id="bookerName" placeholder="กรุณากรอกชื่อผู้จอง" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="bookingDate">วันที่จอง</label>
+                            <input type="text" class="form-control" id="bookingDate" placeholder="เลือกวันที่" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="startTime">เวลาเริ่มต้น</label>
+                            <input type="text" class="form-control" id="startTime" placeholder="เลือกเวลาเริ่มต้น" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="endTime">เวลาสิ้นสุด</label>
+                            <input type="text" class="form-control" id="endTime" placeholder="เลือกเวลาสิ้นสุด" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingReason">เหตุผลที่จอง</label>
+                        <textarea class="form-control" id="bookingReason" rows="3" placeholder="กรุณากรอกเหตุผลที่จอง" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">อุปกรณ์ที่ต้องการ</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="computer" name="equipment" value="เครื่องคอมพิวเตอร์">
+                                <label for="computer">เครื่องคอมพิวเตอร์</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="projector" name="equipment" value="โปรเจ็คเตอร์">
+                                <label for="projector">โปรเจ็คเตอร์</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sound" name="equipment" value="เครื่องเสียง">
+                                <label for="sound">เครื่องเสียง</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="microphone" name="equipment" value="ไมโครโฟน">
+                                <label for="microphone">ไมโครโฟน</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="book-btn" style="width: 100%;">ยืนยันการจอง</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bookings List Page -->
+        <div class="page fade-in" id="bookingsPage" style="display: none;">
+            <h2 class="page-title">รายการจอง</h2>
+            <div class="table-container" data-aos="fade-up">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ห้อง</th>
+                            <th>ชื่อผู้จอง</th>
+                            <th>วันที่</th>
+                            <th>เวลา</th>
+                            <th>สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookingsList">
+                        <!-- Booking data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div class="page fade-in" id="dashboardPage" style="display: none;">
+            <h2 class="page-title">แดชบอร์ดการจอง</h2>
+            <div class="dashboard-stats" data-aos="fade-up">
+                <div class="stat-card">
+                    <div class="stat-title">จำนวนการจองทั้งหมด</div>
+                    <div class="stat-value" id="totalBookings">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">จำนวนการจองที่อนุมัติ</div>
+                    <div class="stat-value" id="approvedBookings">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">จำนวนการจองที่รอดำเนินการ</div>
+                    <div class="stat-value" id="pendingBookings">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">จำนวนการจองที่ไม่อนุมัติ</div>
+                    <div class="stat-value" id="rejectedBookings">0</div>
+                </div>
+            </div>
+            <div class="chart-container" data-aos="fade-up">
+                <h3 class="chart-title">การจองแยกตามห้อง</h3>
+                <canvas id="roomBookingsChart"></canvas>
+            </div>
+            <div class="chart-container" data-aos="fade-up">
+                <h3 class="chart-title">การจองรายเดือน</h3>
+                <canvas id="monthlyBookingsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Admin Page -->
+        <div class="page fade-in" id="adminPage" style="display: none;">
+            <h2 class="page-title">จัดการการจอง (สำหรับแอดมิน)</h2>
+            <div class="table-container" data-aos="fade-up">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ห้อง</th>
+                            <th>ชื่อผู้จอง</th>
+                            <th>วันที่</th>
+                            <th>เวลา</th>
+                            <th>เหตุผล</th>
+                            <th>อุปกรณ์</th>
+                            <th>สถานะ</th>
+                            <th>การจัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminBookingsList">
+                        <!-- Admin booking data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Copyright © 2025 Samroiwit. Phakhawat</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // DOM Elements
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const pages = document.querySelectorAll('.page');
+        const menuLinks = document.querySelectorAll('.sidebar-menu a');
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingsList = document.getElementById('bookingsList');
+        const adminBookingsList = document.getElementById('adminBookingsList');
+
+        // Sample data storage (in a real app, this would be stored in a database)
+        let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+        let isAdmin = false;
+
+        // Initialize date and time pickers
+        flatpickr("#bookingDate", {
+            locale: "th",
+            dateFormat: "d/m/Y",
+            minDate: "today",
+            disableMobile: true
+        });
+
+        flatpickr("#startTime", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            minuteIncrement: 30,
+            disableMobile: true
+        });
+
+        flatpickr("#endTime", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true,
+            minuteIncrement: 30,
+            disableMobile: true
+        });
+
+        // Show loading overlay
+        function showLoading() {
+            loadingOverlay.classList.add('active');
+        }
+
+        // Hide loading overlay
+        function hideLoading() {
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Navigation
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetPage = this.getAttribute('data-page');
+                
+                // Check if admin page and not logged in
+                if (targetPage === 'admin' && !isAdmin) {
+                    promptAdminLogin();
+                    return;
+                }
+                
+                showPage(targetPage);
+                
+                // Update active link
+                menuLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Hide menu on mobile after clicking
+                if (window.innerWidth <= 768) {
+                    sidebarMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Show specific page
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.style.display = 'none';
+            });
+            document.getElementById(`${pageId}Page`).style.display = 'block';
+            
+            // If dashboard page, update charts
+            if (pageId === 'dashboard') {
+                updateDashboardStats();
+                renderCharts();
+            }
+            
+            // If bookings or admin page, update lists
+            if (pageId === 'bookings') {
+                renderBookingsList();
+            }
+            
+            if (pageId === 'admin' && isAdmin) {
+                renderAdminBookingsList();
+            }
+        }
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', function() {
+            sidebarMenu.classList.toggle('active');
+        });
+
+        // Responsive menu handling
+        function handleResponsiveMenu() {
+            if (window.innerWidth <= 768) {
+                menuToggle.style.display = 'block';
+                sidebarMenu.classList.remove('active');
+            } else {
+                menuToggle.style.display = 'none';
+                sidebarMenu.classList.add('active');
+            }
+        }
+
+        // Admin login prompt
+        function promptAdminLogin() {
+            Swal.fire({
+                title: 'เข้าสู่ระบบแอดมิน',
+                input: 'password',
+                inputPlaceholder: 'กรุณากรอกรหัสผ่าน',
+                inputAttributes: {
+                    autocapitalize: 'off',
+                    autocorrect: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'เข้าสู่ระบบ',
+                cancelButtonText: 'ยกเลิก',
+                showLoaderOnConfirm: true,
+                preConfirm: (password) => {
+                    return new Promise((resolve) => {
+                        showLoading();
+                        setTimeout(() => {
+                            hideLoading();
+                            if (password === '123456') {
+                                resolve(true);
+                            } else {
+                                Swal.showValidationMessage('รหัสผ่านไม่ถูกต้อง');
+                                resolve(false);
+                            }
+                        }, 1000);
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    isAdmin = true;
+                    showPage('admin');
+                    menuLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === 'admin') {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'เข้าสู่ระบบสำเร็จ',
+                        text: 'ยินดีต้อนรับเข้าสู่ระบบแอดมิน',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+
+        // Show booking form for specific room
+        function showBookingForm(roomName) {
+            document.getElementById('roomSelect').value = roomName;
+            showPage('booking');
+            menuLinks.forEach(link => {
+                if (link.getAttribute('data-page') === 'booking') {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Check for booking conflicts
+        function checkBookingConflict(room, date, startTime, endTime, excludeId = null) {
+            return bookings.some(booking => {
+                if (excludeId && booking.id === excludeId) return false;
+                
+                if (booking.room === room && booking.date === date) {
+                    const bookingStart = convertTimeToMinutes(booking.startTime);
+                    const bookingEnd = convertTimeToMinutes(booking.endTime);
+                    const newStart = convertTimeToMinutes(startTime);
+                    const newEnd = convertTimeToMinutes(endTime);
+                    
+                    // Check if time periods overlap
+                    return (newStart < bookingEnd && newEnd > bookingStart);
+                }
+                return false;
+            });
+        }
+
+        // Convert time string to minutes for comparison
+        function convertTimeToMinutes(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        // Handle booking form submission
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const room = document.getElementById('roomSelect').value;
+            const bookerName = document.getElementById('bookerName').value;
+            const date = document.getElementById('bookingDate').value;
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const reason = document.getElementById('bookingReason').value;
+            
+            // Get selected equipment
+            const equipmentCheckboxes = document.querySelectorAll('input[name="equipment"]:checked');
+            const equipment = Array.from(equipmentCheckboxes).map(cb => cb.value);
+            
+            // Validate form
+            if (!room || !bookerName || !date || !startTime || !endTime || !reason) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+                    text: 'โปรดตรวจสอบข้อมูลและลองอีกครั้ง'
+                });
+                return;
+            }
+            
+            // Validate time
+            const start = convertTimeToMinutes(startTime);
+            const end = convertTimeToMinutes(endTime);
+            
+            if (start >= end) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เวลาไม่ถูกต้อง',
+                    text: 'เวลาสิ้นสุดต้องมากกว่าเวลาเริ่มต้น'
+                });
+                return;
+            }
+            
+            // Check for booking conflicts
+            if (checkBookingConflict(room, date, startTime, endTime)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถจองได้',
+                    text: 'ห้องนี้ถูกจองในช่วงเวลาดังกล่าวแล้ว กรุณาเลือกเวลาอื่น'
+                });
+                return;
+            }
+            
+            // Show loading
+            showLoading();
+            
+            // Simulate server processing
+            setTimeout(() => {
+                // Create new booking
+                const newBooking = {
+                    id: Date.now().toString(),
+                    room,
+                    bookerName,
+                    date,
+                    startTime,
+                    endTime,
+                    reason,
+                    equipment,
+                    status: 'pending',
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Add to bookings array
+                bookings.push(newBooking);
+                
+                // Save to localStorage
+                localStorage.setItem('bookings', JSON.stringify(bookings));
+                
+                // Hide loading
+                hideLoading();
+                
+                // Show success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'จองห้องสำเร็จ',
+                    text: 'การจองของคุณถูกบันทึกแล้ว รอการอนุมัติจากแอดมิน',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    // Reset form
+                    bookingForm.reset();
+                    
+                    // Show bookings list
+                    showPage('bookings');
+                    menuLinks.forEach(link => {
+                        if (link.getAttribute('data-page') === 'bookings') {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                    
+                    // Render bookings list
+                    renderBookingsList();
+                });
+            }, 1500);
+        });
+
+        // Render bookings list
+        function renderBookingsList() {
+            if (!bookingsList) return;
+            
+            bookingsList.innerHTML = '';
+            
+            if (bookings.length === 0) {
+                bookingsList.innerHTML = '<tr><td colspan="5" style="text-align: center;">ไม่มีรายการจอง</td></tr>';
+                return;
+            }
+            
+            // Sort bookings by date and time
+            const sortedBookings = [...bookings].sort((a, b) => {
+                const dateA = convertDateToTimestamp(a.date, a.startTime);
+                const dateB = convertDateToTimestamp(b.date, b.startTime);
+                return dateA - dateB;
+            });
+            
+            sortedBookings.forEach(booking => {
+                const row = document.createElement('tr');
+                
+                // Create status class based on booking status
+                let statusClass = '';
+                let statusText = '';
+                
+                switch (booking.status) {
+                    case 'approved':
+                        statusClass = 'status-approved';
+                        statusText = 'อนุมัติแล้ว';
+                        break;
+                    case 'rejected':
+                        statusClass = 'status-rejected';
+                        statusText = 'ไม่อนุมัติ';
+                        break;
+                    default:
+                        statusClass = 'status-pending';
+                        statusText = 'รอดำเนินการ';
+                }
+                
+                row.innerHTML = `
+                    <td>${booking.room}</td>
+                    <td>${booking.bookerName}</td>
+                    <td>${booking.date}</td>
+                    <td>${booking.startTime} - ${booking.endTime}</td>
+                    <td><span class="status ${statusClass}">${statusText}</span></td>
+                `;
+                
+                bookingsList.appendChild(row);
+            });
+        }
+
+        // Render admin bookings list
+        function renderAdminBookingsList() {
+            if (!adminBookingsList) return;
+            
+            adminBookingsList.innerHTML = '';
+            
+            if (bookings.length === 0) {
+                adminBookingsList.innerHTML = '<tr><td colspan="8" style="text-align: center;">ไม่มีรายการจอง</td></tr>';
+                return;
+            }
+            
+            // Sort bookings by date and time
+            const sortedBookings = [...bookings].sort((a, b) => {
+                const dateA = convertDateToTimestamp(a.date, a.startTime);
+                const dateB = convertDateToTimestamp(b.date, b.startTime);
+                return dateA - dateB;
+            });
+            
+            sortedBookings.forEach(booking => {
+                const row = document.createElement('tr');
+                
+                // Create status class based on booking status
+                let statusClass = '';
+                let statusText = '';
+                
+                switch (booking.status) {
+                    case 'approved':
+                        statusClass = 'status-approved';
+                        statusText = 'อนุมัติแล้ว';
+                        break;
+                    case 'rejected':
+                        statusClass = 'status-rejected';
+                        statusText = 'ไม่อนุมัติ';
+                        break;
+                    default:
+                        statusClass = 'status-pending';
+                        statusText = 'รอดำเนินการ';
+                }
+                
+                // Create action buttons based on status
+                let actionButtons = '';
+                
+                if (booking.status === 'pending') {
+                    actionButtons = `
+                        <button class="action-btn approve-btn" onclick="approveBooking('${booking.id}')">อนุมัติ</button>
+                        <button class="action-btn reject-btn" onclick="rejectBooking('${booking.id}')">ไม่อนุมัติ</button>
+                    `;
+                } else {
+                    actionButtons = `
+                        <button class="action-btn" onclick="resetBookingStatus('${booking.id}')">รีเซ็ต</button>
+                    `;
+                }
+                
+                row.innerHTML = `
+                    <td>${booking.room}</td>
+                    <td>${booking.bookerName}</td>
+                    <td>${booking.date}</td>
+                    <td>${booking.startTime} - ${booking.endTime}</td>
+                    <td>${booking.reason}</td>
+                    <td>${booking.equipment.join(', ') || '-'}</td>
+                    <td><span class="status ${statusClass}">${statusText}</span></td>
+                    <td>${actionButtons}</td>
+                `;
+                
+                adminBookingsList.appendChild(row);
+            });
+        }
+
+        // Convert date and time to timestamp for sorting
+        function convertDateToTimestamp(dateStr, timeStr) {
+            const [day, month, year] = dateStr.split('/').map(Number);
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            
+            return new Date(year, month - 1, day, hours, minutes).getTime();
+        }
+
+        // Approve booking
+        function approveBooking(id) {
+            showLoading();
+            
+            setTimeout(() => {
+                const bookingIndex = bookings.findIndex(b => b.id === id);
+                
+                if (bookingIndex !== -1) {
+                    bookings[bookingIndex].status = 'approved';
+                    localStorage.setItem('bookings', JSON.stringify(bookings));
+                    
+                    hideLoading();
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'อนุมัติการจองสำเร็จ',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        renderAdminBookingsList();
+                        updateDashboardStats();
+                    });
+                }
+            }, 1000);
+        }
+
+        // Reject booking
+        function rejectBooking(id) {
+            showLoading();
+            
+            setTimeout(() => {
+                const bookingIndex = bookings.findIndex(b => b.id === id);
+                
+                if (bookingIndex !== -1) {
+                    bookings[bookingIndex].status = 'rejected';
+                    localStorage.setItem('bookings', JSON.stringify(bookings));
+                    
+                    hideLoading();
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ปฏิเสธการจองสำเร็จ',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        renderAdminBookingsList();
+                        updateDashboardStats();
+                    });
+                }
+            }, 1000);
+        }
+
+        // Reset booking status
+        function resetBookingStatus(id) {
+            showLoading();
+            
+            setTimeout(() => {
+                const bookingIndex = bookings.findIndex(b => b.id === id);
+                
+                if (bookingIndex !== -1) {
+                    bookings[bookingIndex].status = 'pending';
+                    localStorage.setItem('bookings', JSON.stringify(bookings));
+                    
+                    hideLoading();
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'รีเซ็ตสถานะการจองสำเร็จ',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        renderAdminBookingsList();
+                        updateDashboardStats();
+                    });
+                }
+            }, 1000);
+        }
+
+        // Update dashboard statistics
+        function updateDashboardStats() {
+            const totalBookings = bookings.length;
+            const approvedBookings = bookings.filter(b => b.status === 'approved').length;
+            const pendingBookings = bookings.filter(b => b.status === 'pending').length;
+            const rejectedBookings = bookings.filter(b => b.status === 'rejected').length;
+            
+            document.getElementById('totalBookings').textContent = totalBookings;
+            document.getElementById('approvedBookings').textContent = approvedBookings;
+            document.getElementById('pendingBookings').textContent = pendingBookings;
+            document.getElementById('rejectedBookings').textContent = rejectedBookings;
+        }
+
+        // Render dashboard charts
+        function renderCharts() {
+            // Room bookings chart
+            const roomLabels = ['ห้องคอม 531', 'ห้องคอม 532', 'ห้องคอม 533', 'ห้องคอม 534', 'ห้องคอม 535', 'ห้องคอม 536'];
+            const roomData = roomLabels.map(room => {
+                return bookings.filter(b => b.room === room).length;
+            });
+            
+            const roomCtx = document.getElementById('roomBookingsChart').getContext('2d');
+            
+            if (window.roomChart) {
+                window.roomChart.destroy();
+            }
+            
+            window.roomChart = new Chart(roomCtx, {
+                type: 'bar',
+                data: {
+                    labels: roomLabels,
+                    datasets: [{
+                        label: 'จำนวนการจอง',
+                        data: roomData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Monthly bookings chart
+            const months = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 
+                           'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+            
+            // Generate random data for monthly chart (in a real app, this would be actual data)
+            const monthlyData = months.map(() => Math.floor(Math.random() * 10));
+            
+            const monthlyCtx = document.getElementById('monthlyBookingsChart').getContext('2d');
+            
+            if (window.monthlyChart) {
+                window.monthlyChart.destroy();
+            }
+            
+            window.monthlyChart = new Chart(monthlyCtx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'จำนวนการจองรายเดือน',
+                        data: monthlyData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize the app
+        function initApp() {
+            // Show home page by default
+            showPage('home');
+            
+            // Handle responsive menu
+            handleResponsiveMenu();
+            window.addEventListener('resize', handleResponsiveMenu);
+            
+            // Add sample data if none exists
+            if (bookings.length === 0) {
+                const sampleBookings = [
+                    {
+                        id: '1',
+                        room: 'ห้องคอม 531',
+                        bookerName: 'อาจารย์สมชาย ใจดี',
+                        date: '15/06/2025',
+                        startTime: '09:00',
+                        endTime: '12:00',
+                        reason: 'สอนวิชาคอมพิวเตอร์เบื้องต้น',
+                        equipment: ['เครื่องคอมพิวเตอร์', 'โปรเจ็คเตอร์'],
+                        status: 'approved',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: '2',
+                        room: 'ห้องคอม 532',
+                        bookerName: 'อาจารย์สมหญิง รักเรียน',
+                        date: '16/06/2025',
+                        startTime: '13:00',
+                        endTime: '16:00',
+                        reason: 'สอนวิชาการเขียนโปรแกรม',
+                        equipment: ['เครื่องคอมพิวเตอร์', 'โปรเจ็คเตอร์', 'ไมโครโฟน'],
+                        status: 'pending',
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: '3',
+                        room: 'ห้องคอม 533',
+                        bookerName: 'อาจารย์วิชัย เทคโนโลยี',
+                        date: '17/06/2025',
+                        startTime: '09:00',
+                        endTime: '12:00',
+                        reason: 'อบรมการใช้โปรแกรมกราฟิก',
+                        equipment: ['เครื่องคอมพิวเตอร์', 'โปรเจ็คเตอร์', 'เครื่องเสียง'],
+                        status: 'rejected',
+                        createdAt: new Date().toISOString()
+                    }
+                ];
+                
+                bookings = sampleBookings;
+                localStorage.setItem('bookings', JSON.stringify(bookings));
+            }
+        }
+
+        // Run the app
+        initApp();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a290b72435d334',t:'MTc1OTcyNjUxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
